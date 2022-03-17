@@ -1,0 +1,32 @@
+# Name of Configuration and Experiment Mode.
+name: "CloneDetectionConfig"
+task: "CloneDetection"
+model_type: "SVM"
+task_type: "PairwiseClassification"
+classify_mode: "Binary"
+
+# Vocabulary
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "poj104clone"
+  path: "./data/poj104clone/"
+
+# Setup Configuration
+output_path: "./trained_model/clone_detection"
+use_cuda: True
+disable_tqdm: False
+initial_test: False
+save_output: True
+use_scheduler: True
+class_weight: False
+gpu_id: 0
+
+# Generic Model Hyperparameters
+max_function_length: 150
+class_num: 2
+mm_var: "f1" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["f1", "accuracy"]
+

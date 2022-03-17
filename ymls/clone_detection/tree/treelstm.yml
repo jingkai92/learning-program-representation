@@ -1,0 +1,58 @@
+# Name of Configuration and Experiment Mode.
+name: "CloneDetectionConfig"
+task: "CloneDetection"
+model_type: "TreeLSTM"
+task_type: "PairwiseClassification"
+classify_mode: "Binary"
+
+# Vocabulary
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "poj104clone"
+  path: "./data/poj104clone/"
+
+# Setup Configuration
+output_path: "./trained_model/clone_detection/treelstm"
+use_cuda: True
+disable_tqdm: False
+initial_test: False
+save_output: True
+use_scheduler: True
+class_weight: False
+
+
+# Generic Model Hyperparameters
+lr: 0.001
+class_num: 2
+batch_size: 128
+optimizer_type: ADAM
+max_epoch: 50
+patience: 10
+gpu_id: 0
+
+# Tuning Parameters
+max_code_token_len: 20
+dropout: 0.2
+word_emb_dims: 128
+mm_var: "f1" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["f1", "accuracy"]
+self_loop: False
+reverse_edge: False
+use_edge_type: ast # ast, cfg, cdg, ddg, and cpg
+
+# Node Embedding Layer
+node_emb_layer:
+  mode: "LSTMEmbedNode" # Average/LSTM/MLP
+  dims: 128
+  layers: 1
+  use_nfeature: "distinct-feats" # structure or textual or distinct-feats
+
+treelstm:
+  in_dim: 64
+  out_dim: 128
+  root_predict: False
+  graph_agg: max # sum, mean, max
+

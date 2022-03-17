@@ -1,0 +1,47 @@
+# Name of Configuration and Experiment Mode.
+name: "CodeClassificationConfig"
+task: "CodeClassification"
+model_type: "BiLSTM"
+task_type: "Classification"
+classify_mode: "Multi-class"
+
+# Vocabulary Setting
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "online-judge"
+  path: "/home/jingkai/projects/gnn_studies/data/poj104/"
+
+# General Configuration
+output_path: "./trained_model/code_classification/bilstm"
+use_cuda: True
+disable_tqdm: True
+initial_test: False
+save_output: True
+mm_var: "weighted_accuracy" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["weighted_accuracy"]
+gpu_id: 0
+class_weight: True
+use_scheduler: True
+
+# Generic Model Hyperparameters
+max_function_length: 150
+class_num: 104
+optimizer_type: ADAM
+lr: 0.01
+batch_size: 128
+max_epoch: 50
+patience: 10
+word_emb_dims: 128
+
+# BiLSTM Model Parameters
+lstm:
+  dims: 128
+  dropout: 0.2
+  layer: 4
+  bidirectional: True
+
+
+

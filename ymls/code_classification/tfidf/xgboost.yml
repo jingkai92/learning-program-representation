@@ -1,0 +1,36 @@
+# Name of Configuration and Experiment Mode.
+name: "CodeClassificationConfig"
+task: "CodeClassification"
+model_type: "XGBoost"
+task_type: "Classification"
+classify_mode: "Multi-class"
+
+# Vocabulary Setting
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "online-judge"
+  path: "./data/poj104/"
+
+# Setup Configuration
+output_path: "./trained_model/code_classification/tfidf"
+use_cuda: True
+disable_tqdm: True
+initial_test: False
+save_output: False
+
+
+# Generic Model Hyperparameters
+max_function_length: 150
+xgboost_objective: 'multi:softprob'
+class_num: 104
+round_num: 40
+tree_depth: 32
+vuln_line_pred: False
+class_weight: False
+mm_var: "weighted_accuracy" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["weighted_accuracy"]
+gpu_id: 0
+

@@ -1,0 +1,31 @@
+# Name of Configuration and Experiment Mode.
+name: "CodeClassificationConfig"
+task: "CodeClassification"
+model_type: "SVM"
+task_type: "Classification"
+classify_mode: "Multi-class"
+
+# Vocabulary Setting
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "online-judge"
+  path: "./data/poj104/"
+
+# Setup Configuration
+output_path: "./trained_model/code_classification/tfidf"
+use_cuda: True
+disable_tqdm: True
+initial_test: False
+save_output: False
+class_weight: True
+
+# Generic Model Hyperparameters
+max_function_length: 300
+class_num: 104
+monitor_variable: "weighted_accuracy"
+mm_var: "weighted_accuracy" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["weighted_accuracy"]
+gpu_id: 0

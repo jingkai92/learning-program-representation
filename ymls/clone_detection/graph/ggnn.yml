@@ -1,0 +1,57 @@
+# Name of Configuration and Experiment Mode.
+name: "CloneDetectionConfig"
+task: "CloneDetection"
+model_type: "GGNN"
+task_type: "PairwiseClassification"
+classify_mode: "Binary"
+
+# Vocabulary Setting
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "poj104clone"
+  path: "./data/poj104clone/"
+
+# Setup Configuration
+output_path: "./clone_detection/ggnn"
+use_cuda: True
+disable_tqdm: True
+initial_test: False
+save_output: True
+use_scheduler: True
+
+# Generic Model Hyperparameters
+lr: 0.001
+optimizer_type: ADAM
+batch_size: 128
+class_num: 2
+max_epoch: 50
+patience: 10
+class_weight: False
+mm_var: "f1" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["f1", "accuracy"]
+max_code_token_len: 20
+word_emb_dims: 128
+dropout: 0.2
+self_loop: True
+reverse_edge: True
+use_edge_type: cpg # ast, cfg, cdg, ddg, and cpg
+gpu_id: 0
+
+# Node Embedding Layer
+node_emb_layer:
+  mode: "LSTMEmbedNode" # Average/LSTM/MLP
+  dims: 128
+  layers: 1
+  use_nfeature: "structure" # structure or textual or distinct-feats
+
+# GGNN Parameters
+ggnn:
+  initial_representation: True
+  in_dim: 128
+  out_dim: 128
+  nsteps: 8
+  dropout: 0.2
+  graph_agg: mean

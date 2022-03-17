@@ -1,0 +1,56 @@
+# Name of Configuration and Experiment Mode.
+name: "CodeClassificationConfig"
+task: "CodeClassification"
+model_type: "GCN"
+task_type: "Classification"
+classify_mode: "Multi-class"
+
+# Vocabulary Setting
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "online-judge"
+  path: "./data/poj104/"
+
+# General Configuration
+output_path: "./trained_model/code_classification/gcn"
+use_cuda: True
+disable_tqdm: True
+class_weight: True
+initial_test: False
+save_output: True
+use_scheduler: True
+mm_var: "weighted_accuracy" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["weighted_accuracy"]
+gpu_id: 0
+
+# Generic Model Hyperparameters
+word_emb_dims: 128
+dropout: 0.2
+max_code_token_len: 20
+class_num: 104
+optimizer_type: ADAM
+lr: 0.01
+batch_size: 128
+max_epoch: 50
+patience: 10
+
+# Node Embedding Layer
+node_emb_layer:
+  mode: "LSTMEmbedNode" # Average/LSTM/MLP
+  dims: 128
+  layers: 1
+  use_nfeature: "both" # structure or textual or both
+
+# GCN Parameters
+gcn:
+  in_dim: 128
+  out_dim: 128
+  layers: 8
+  graph_agg: mean # sum, mean, max
+
+
+
+

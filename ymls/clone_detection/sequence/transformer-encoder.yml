@@ -1,0 +1,51 @@
+# Name of Configuration and Experiment Mode.
+name: "CloneDetectionConfig"
+task: "CloneDetection"
+model_type: "TRANSFORMERENCODER"
+task_type: "PairwiseClassification"
+classify_mode: "Binary"
+
+# Vocabulary Setting
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "poj104clone"
+  path: "./data/poj104clone/"
+
+# Setup Configuration
+output_path: "./trained_model/clone_detection/transformer-encoder"
+use_cuda: True
+disable_tqdm: False
+initial_test: False
+save_output: True
+use_scheduler: True
+class_weight: False
+gpu_id: 0
+
+# Generic Model Hyperparameters
+lr: 0.0001
+optimizer_type: ADAM
+class_num: 2
+
+# Tuning Parameters
+max_function_length: 150
+batch_size: 128
+max_epoch: 50
+patience: 10
+word_emb_dims: 128
+mm_var: "f1" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["f1", "accuracy"]
+
+# Transformer Params
+transformer:
+  pos_dropout: 0.2
+  nhead: 2
+  enc_nlayers: 2
+  dim_feedforward: 128
+  tf_dropout: 0.2
+  d_model: 128
+  strong_pos_enc: False
+
+

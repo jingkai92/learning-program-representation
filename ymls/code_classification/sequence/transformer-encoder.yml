@@ -1,0 +1,52 @@
+# Name of Configuration and Experiment Mode.
+name: "CodeClassificationConfig"
+task: "CodeClassification"
+model_type: "TRANSFORMERENCODER"
+task_type: "Classification"
+classify_mode: "Multi-class"
+
+# Vocabulary Setting
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "online-judge"
+  path: "./data/poj104/"
+
+# General Configuration
+output_path: "./trained_model/code_classification/transformer-encoder"
+use_cuda: True
+disable_tqdm: True
+initial_test: False
+save_output: True
+class_weight: True
+use_scheduler: False
+strong_pos_enc: True
+mm_var: "weighted_accuracy" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["weighted_accuracy"]
+gpu_id: 0
+
+# Generic Model Hyperparameters
+max_function_length: 300
+class_num: 104
+optimizer_type: ADAM
+lr: 0.001
+batch_size: 128
+max_epoch: 50
+patience: 10
+word_emb_dims: 128
+
+
+# Transformer Parameters
+transformer:
+  pos_dropout: 0.2
+  nhead: 4
+  enc_nlayers: 4
+  dim_feedforward: 128
+  tf_dropout: 0.2
+  d_model: 128
+
+
+
+

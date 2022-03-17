@@ -1,0 +1,48 @@
+# Name of Configuration and Experiment Mode.
+name: "CloneDetectionConfig"
+task: "CloneDetection"
+model_type: "BiLSTM"
+task_type: "PairwiseClassification"
+classify_mode: "Binary"
+
+# Vocabulary Setting
+token_vocab_path: "./data/poj104/token_vocab_dict.pkl"
+node_vocab_path: "./data/poj104/node_vocab_dict.pkl"
+
+# Dataset Specification Configuration
+dataset:
+  name: "poj104clone"
+  path: "./data/poj104clone/"
+
+# General Configuration
+output_path: "./trained_model/clone_detection/bilstm"
+use_cuda: True
+disable_tqdm: True
+initial_test: False
+save_output: True
+use_scheduler: True
+class_weight: False
+gpu_id: 0
+
+# Generic Model Hyperparameters
+lr: 0.0001
+max_function_length: 150
+class_num: 2
+optimizer_type: ADAM
+
+# Tuning Parameters
+batch_size: 128
+max_epoch: 50
+patience: 10
+word_emb_dims: 128
+mm_var: "f1" # Main Monitor Variable/Main Metric Variable
+monitor_vars: ["f1", "accuracy"]
+
+# LSTM Params
+lstm:
+  dims: 128
+  dropout: 0.2
+  layer: 4
+  bidirectional: True
+
+
