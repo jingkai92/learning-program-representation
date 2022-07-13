@@ -167,7 +167,7 @@ class BaseTrainer:
         """
         if not self.model:
             return None
-        self.print_msg("Loading Model from %s" % model_path)
+        print_msg("Loading Model from %s" % model_path)
         self.model.load_state_dict(torch.load(model_path))
         self.model.eval()
         return self.model
