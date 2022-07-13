@@ -15,7 +15,7 @@ dataset:
   path: "./data/poj104clone/"
 
 # Setup Configuration
-output_path: "./clone_detection/ggnn"
+output_path: "./trained_model/clone_detection/ggnn"
 use_cuda: True
 disable_tqdm: True
 initial_test: False
